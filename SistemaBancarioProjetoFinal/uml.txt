@@ -1,0 +1,42 @@
+Usuario # nome: String
+        # cpf: String
+        # senha: String
+        Usuario (String: nome, String: cpf, String: senha)
+        Autenticar(): boolean
+
+Cliente extends Usuario
+        Cliente (String nome...)
+            super(nome, cpf, senha)
+
+Funcionario (abstrata) extends Usuario
+        Funcionario(String cpf, String senha)
+
+Gerente extends Funcionario
+        # cargo: String
+        # identificadorAgencia: int
+
+Diretor extends Funcionario
+        # cargo: String
+
+Presidente extends Funcionario
+        # cargo: String
+
+Conta (abstrata)
+        # cpfTitular: Cliente
+        # numeroConta : int
+        # identificadorAgencia: int
+        - saldo : double
+        getNumeroConta(): int
+        getIdentificadorAgencia(): int
+        getSaldo(): double
+        depositar(double valor): void
+        sacar(double valor): void
+        transferir(double valor, Conta destino): boolean
+
+ContaCorrente extends Conta
+        - tipo: String
+
+ContaPoupanca extends Conta
+        - tipo: String
+
+Enum
