@@ -1,0 +1,4 @@
+tudo no singular
+pacote - letra minuscula
+classe - PascalCase
+variaveis - camelCase
