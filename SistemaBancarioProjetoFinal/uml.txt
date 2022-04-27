@@ -17,10 +17,13 @@ Funcionario (abstrata) extends Usuario
 
 Gerente extends Funcionario
         # idAgencia: Agencia //enum
+        Gerente(String nome, String cpf, String senha, String cargo, String idAgencia)
 
 Diretor extends Funcionario
+        Diretor(String nome, String cpf, String senha, String cargo)
 
 Presidente extends Funcionario
+        Presidente(String nome, String cpf, String senha, String cargo)
 
 
 Conta (abstrata)

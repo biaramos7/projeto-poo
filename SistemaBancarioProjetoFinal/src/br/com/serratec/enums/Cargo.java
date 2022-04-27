@@ -17,14 +17,14 @@ public enum Cargo {
         this.nomeAmigavel = nomeAmigavel;
     }
 
-    Cargo getCargoPorNomeAmigavel(String nomeRecebido) throws EnumInexistenteException {
-        String nomeRecebidoMinusculo =nomeRecebido.toLowerCase(Locale.ROOT);
-        for(Cargo cargoAtual : Cargo.values()){
-            String nomeCargoAtualMinusculo = cargoAtual.nomeAmigavel.toLowerCase(Locale.ROOT);
-            if (nomeCargoAtualMinusculo.equals(nomeRecebidoMinusculo)){
-                return cargoAtual;
-            }
-        }
-        throw new EnumInexistenteException();
-    }
+//    Cargo getCargoPorNomeAmigavel(String nomeRecebido) throws EnumInexistenteException {
+//        String nomeRecebidoMinusculo =nomeRecebido.toLowerCase(Locale.ROOT);
+//        for(Cargo cargoAtual : Cargo.values()){
+//            String nomeCargoAtualMinusculo = cargoAtual.nomeAmigavel.toLowerCase(Locale.ROOT);
+//            if (nomeCargoAtualMinusculo.equals(nomeRecebidoMinusculo)){
+//                return cargoAtual;
+//            }
+//        }
+//        throw new EnumInexistenteException();
+//    }
 }

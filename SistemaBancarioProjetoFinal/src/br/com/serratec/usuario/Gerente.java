@@ -11,5 +11,15 @@ public class Gerente extends Funcionario{
         this.idAgencia = idAgencia;
     }
 
+    @Override
+    public String toString() {
+        return "Gerente{" +
+                "idAgencia=" + idAgencia +
+                ", cargo=" + cargo +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                '}';
+    }
+
     //metodos especificos de cada tipo de funcionario
 }

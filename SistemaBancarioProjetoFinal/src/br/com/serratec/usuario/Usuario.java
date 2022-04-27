@@ -27,4 +27,8 @@ public abstract class Usuario {
         //TODO: Autenticar usuário
         return true;
     }
+
+    public void Login(String nome, String senha){
+        //TODO: Criar login
+    }
 }
