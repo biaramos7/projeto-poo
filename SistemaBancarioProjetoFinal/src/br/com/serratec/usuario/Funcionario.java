@@ -9,4 +9,5 @@ public abstract class Funcionario extends Usuario{
         super(nome, cpf, senha);
         this.cargo = cargo;
     }
+
 }

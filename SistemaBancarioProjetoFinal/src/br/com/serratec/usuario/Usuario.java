@@ -19,6 +19,10 @@ public abstract class Usuario {
         return nome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
     public boolean Autenticar(){ //interface
         //TODO: Autenticar usuário
         return true;
