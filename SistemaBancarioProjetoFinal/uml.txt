@@ -1,7 +1,10 @@
-Usuario # nome: String
+Usuario <abstract>
+        # nome: String
         # cpf: String
         # senha: String
         Usuario (String: nome, String: cpf, String: senha)
+        setNome();
+        getNome();
         Autenticar(): boolean
 
 Cliente extends Usuario
@@ -13,7 +16,7 @@ Funcionario (abstrata) extends Usuario
         Funcionario(String cpf, String senha)
 
 Gerente extends Funcionario
-        # identificadorAgencia: Agencia //enum
+        # idAgencia: Agencia //enum
 
 Diretor extends Funcionario
 
@@ -23,7 +26,7 @@ Presidente extends Funcionario
 Conta (abstrata)
         # cpfTitular: Cliente
         # numeroConta : int
-        # identificadorAgencia: Agencia //enum
+        # idAgencia: Agencia //enum
         - saldo : double
         getNumeroConta(): int
         getIdentificadorAgencia(): int
