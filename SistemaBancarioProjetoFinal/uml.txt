@@ -9,22 +9,21 @@ Cliente extends Usuario
             super(nome, cpf, senha)
 
 Funcionario (abstrata) extends Usuario
+        # cargo: Cargo //enum
         Funcionario(String cpf, String senha)
 
 Gerente extends Funcionario
-        # cargo: String
-        # identificadorAgencia: int
+        # identificadorAgencia: Agencia //enum
 
 Diretor extends Funcionario
-        # cargo: String
 
 Presidente extends Funcionario
-        # cargo: String
+
 
 Conta (abstrata)
         # cpfTitular: Cliente
         # numeroConta : int
-        # identificadorAgencia: int
+        # identificadorAgencia: Agencia //enum
         - saldo : double
         getNumeroConta(): int
         getIdentificadorAgencia(): int
@@ -39,4 +38,11 @@ ContaCorrente extends Conta
 ContaPoupanca extends Conta
         - tipo: String
 
-Enum
+
+public enum Cargo{
+    GERENTE, DIRETOR, PRESIDENTE
+}
+
+public enum Agencia{
+    A01, A02, A03
+}
