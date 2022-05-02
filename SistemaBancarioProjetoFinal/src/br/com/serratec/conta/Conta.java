@@ -12,14 +12,16 @@ import br.com.serratec.usuario.Cliente;
 
 public abstract class Conta {
 	Scanner leitor = new Scanner(System.in);
-	protected Cliente cliente;
+	protected String cpfTitular;
+	private String nomeTitular;
 	protected int numeroConta;
 	protected Agencia idAgencia;
 	private TipoConta tipo;
 	private double saldo;
 
-	public Conta(Cliente cliente, int numeroConta, Agencia idAgencia, TipoConta tipo) {
-		this.cliente = cliente;
+	public Conta(String cpfTitular, String nomeTitular, int numeroConta, Agencia idAgencia, TipoConta tipo) {
+		this.cpfTitular = cpfTitular;
+		this.nomeTitular = nomeTitular;
 		this.numeroConta = numeroConta;
 		this.idAgencia = idAgencia;
 		this.tipo = tipo;
@@ -42,11 +44,7 @@ public abstract class Conta {
 		System.out.println("Quanto deseja depositar?");
 		double valorDeposito = leitor.nextDouble();
 		if (valorDeposito < 0) {
-<<<<<<< HEAD
 			throw new ValorNegativoException("Deposito não realizado valor negativo.");
-=======
-			throw new DepositoNegativoException("Deposito nao realizado valor negativo.");
->>>>>>> 68be095a6f39d17008c9ac4d8f0c05d46de7e0cd
 		} else {
 			this.saldo += valorDeposito;
 			System.out.println("Deposito de R$ "+valorDeposito+" realizado com sucesso.");
@@ -54,23 +52,23 @@ public abstract class Conta {
 	}
 
 	public void transferir() throws ContaNaoEncontradaException {
-		System.out.println("Digite a conta para transferencia:");
+		System.out.println("Digite a conta para transferência:");
 		int numeroConta = leitor.nextInt();
 		
 		Conta conta = MainSistemaInterno.getConta(numeroConta);
 		if(conta == null) {
-			throw new ContaNaoEncontradaException("Conta Nao encontrada.");
+			throw new ContaNaoEncontradaException("Conta Não encontrada.");
 		}
 		System.out.println("-------------------");
 		System.out.println("Quem vai receber");
 		System.out.println("-------------------");
-		System.out.println("Nome: " + conta.getCliente().getNome());
+		System.out.println("Nome: " + conta.getNomeTitular());
 		System.out.println("Conta: " + numeroConta);
 		System.out.println("Agencia: " + conta.getIdAgencia());
 		System.out.println("-------------------");
 		System.out.println("Deseja continuar?");
 		System.out.println("1. Sim");
-		System.out.println("2. Nao");
+		System.out.println("2. Não");
 		int transferir = leitor.nextInt();
 		System.out.println("-------------------");
 		if(transferir == 1) {
@@ -91,17 +89,17 @@ public abstract class Conta {
 	
 	public void menuInicial() throws ValorNegativoException, SaqueException {
 		
-		if(this.cliente != null) {
+		if(this.cpfTitular != null) {
 			
 			boolean continuaMenu = true;
 			int opcao;
 
 			do {
 				System.out.println("-------------------");
-				System.out.println("Bem vindo(a) " + this.cliente.getNome());
+				System.out.println("Bem vindo(a) " + this.nomeTitular);
 				
-				System.out.println("1. Movimentacoes na Conta");
-				System.out.println("2. Relatorios");
+				System.out.println("1. Movimentações na Conta");
+				System.out.println("2. Relatórios");
 				System.out.println("3. Sair");
 				
 				Scanner leitor = new Scanner(System.in);
@@ -118,11 +116,11 @@ public abstract class Conta {
 					menuRelatorio();
 					break;
 				case 3:
-					System.out.println("Ate mais " + this.cliente.getNome() + "\n\n");
+					System.out.println("Ate mais " + this.nomeTitular + "\n\n");
 					continuaMenu = false;
 					break;
 				default:
-					System.out.println("Opcao invalida!");
+					System.out.println("Opção invalida!");
 					break;
 				}
 				
@@ -145,8 +143,8 @@ public abstract class Conta {
 		do {
 			System.out.println("-------------------");
 			System.out.println("1. Saque");
-			System.out.println("2. DepÃ³sito");
-			System.out.println("3. Transferencia para outra conta");
+			System.out.println("2. Depósito");
+			System.out.println("3. Transferência para outra conta");
 			System.out.println("4. Voltar");
 			
 			Scanner leitor = new Scanner(System.in);
@@ -185,7 +183,7 @@ public abstract class Conta {
 				menuInicial();
 				break;
 			default:
-				System.out.println("Opcao invalida!");
+				System.out.println("Opção invalida!");
 				break;
 			}
 		} while (continuaMenu);
@@ -198,7 +196,7 @@ public abstract class Conta {
 	
 	private void getConsultaSaldo() {
 		System.out.println("-------------------");
-		System.out.println("Seu saldo e de: R$ " + this.saldo);
+		System.out.println("Seu saldo é de: R$ " + this.saldo);
 	}
 	
 	
@@ -212,9 +210,9 @@ public abstract class Conta {
 			System.out.println("-------------------");
 			System.out.println("1. Saldo");
 			if(TipoConta.CONTA_CORRENTE.equals(this.tipo)) {
-				System.out.println("2. Relatorio de tributacao da conta corrente");
+				System.out.println("2. Relatório de tributação da conta corrente");
 			} else if(TipoConta.CONTA_POUPANCA.equals(this.tipo)) {
-				System.out.println("2. Relatorio de Rendimento da poupanca");
+				System.out.println("2. Relatório de Rendimento da poupança");
 			}
 			System.out.println("3. Voltar");
 			
@@ -231,10 +229,10 @@ public abstract class Conta {
 				continuaMenu = false;
 				if(TipoConta.CONTA_CORRENTE.equals(this.tipo)) {
 					//CRIAR METODO
-					System.out.println("CHAMADA SERVICO: Relatorio de tributacao da conta corrente");
+					System.out.println("CHAMADA SERVICO: Relatório de tributação da conta corrente");
 				} else if(TipoConta.CONTA_POUPANCA.equals(this.tipo)) {
 					//CRIAR METODO
-					System.out.println("CHAMADA SERVICO: Relatorio de Rendimento da poupanca");
+					System.out.println("CHAMADA SERVICO: Relatório de Rendimento da poupança");
 				}
 				break;
 			case 3:
@@ -242,7 +240,7 @@ public abstract class Conta {
 				menuInicial();
 				break;
 			default:
-				System.out.println("Opcao invalida!");
+				System.out.println("Opção invalida!");
 				break;
 			}
 			
@@ -253,13 +251,17 @@ public abstract class Conta {
 		}
 
 	}	
-	
-	public Cliente getCliente() {
-		return cliente;
+
+	public String getNomeTitular() {
+		return nomeTitular;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNomeTitular(String nomeTitular) {
+		this.nomeTitular = nomeTitular;
+	}
+
+	public String getCpfTitular() {
+		return cpfTitular;
 	}
 
 	public int getNumeroConta() {

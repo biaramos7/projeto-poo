@@ -7,7 +7,7 @@ import br.com.serratec.usuario.Cliente;
 public class ContaCorrente extends Conta {
 	
     public ContaCorrente(Cliente cliente, int numeroConta, Agencia idAgencia) {
-        super(cliente, numeroConta, idAgencia, TipoConta.CONTA_CORRENTE);
+        super(cliente.getCpf(), cliente.getNome(), numeroConta, idAgencia, TipoConta.CONTA_CORRENTE);
     }
 	
 }

@@ -1,6 +1,5 @@
  package br.com.serratec.enums;
 
-import br.com.serratec.excecoes.EnumInexistenteException;
 import java.util.Locale;
 
 public enum Cargo {
@@ -31,16 +30,4 @@ public enum Cargo {
 	public void setNomeAmigavel(String nomeAmigavel) {
 		this.nomeAmigavel = nomeAmigavel;
 	}
- 
-//    Cargo getCargoPorNomeAmigavel(String nomeRecebido) throws EnumInexistenteException {
-//    Cargo getCargoPorNomeAmigavel(String nomeRecebido) {
-//        String nomeRecebidoMinusculo =nomeRecebido.toLowerCase(Locale.ROOT);
-//        for(Cargo cargoAtual : Cargo.values()){
-//            String nomeCargoAtualMinusculo = cargoAtual.nomeAmigavel.toLowerCase(Locale.ROOT);
-//            if (nomeCargoAtualMinusculo.equals(nomeRecebidoMinusculo)){
-//                return cargoAtual;
-//            }
-//        }
-//        throw new EnumInexistenteException();
-//    }
 }
