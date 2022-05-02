@@ -1,4 +1,4 @@
-package br.com.serratec.usuario;
+ package br.com.serratec.usuario;
 
 import br.com.serratec.enums.Cargo;
 

@@ -2,12 +2,12 @@ package br.com.serratec.conta;
 
 import java.util.Scanner;
 
-import br.com.serratec.MainSistemaInterno;
+import br.com.serratec.dominio.MainSistemaInterno;
 import br.com.serratec.enums.Agencia;
 import br.com.serratec.enums.TipoConta;
-import br.com.serratec.excecao.ContaNaoEncontradaException;
-import br.com.serratec.excecao.DepositoNegativoException;
-import br.com.serratec.excecao.SaqueException;
+import br.com.serratec.excecoes.ContaNaoEncontradaException;
+import br.com.serratec.excecoes.ValorNegativoException;
+import br.com.serratec.excecoes.SaqueException;
 import br.com.serratec.usuario.Cliente;
 
 public abstract class Conta {
@@ -27,22 +27,24 @@ public abstract class Conta {
 		this.tipo = tipo;
 	}
 
-	public void sacar() throws SaqueException {
+	public void sacar() throws SaqueException, ValorNegativoException {
 		System.out.println("Digite o valor do saque: ");
 		double valorSaque = leitor.nextDouble();
 		if(valorSaque > this.saldo) {
 			throw new SaqueException("Saldo insuficiente.");
-		}else {
+		}else if (valorSaque < 0) {
+			throw new ValorNegativoException("Saque não realizado valor negativo.");
+		} else {
 			saldo -= valorSaque;
 			System.out.println("Saque de R$ "+valorSaque+" efetuado com sucesso.");
 		}
 	}
 	
-	public void depositar() throws DepositoNegativoException {
+	public void depositar() throws ValorNegativoException {
 		System.out.println("Quanto deseja depositar?");
 		double valorDeposito = leitor.nextDouble();
 		if (valorDeposito < 0) {
-			throw new DepositoNegativoException("Deposito não realizado valor negativo.");
+			throw new ValorNegativoException("Deposito não realizado valor negativo.");
 		} else {
 			this.saldo += valorDeposito;
 			System.out.println("Deposito de R$ "+valorDeposito+" realizado com sucesso.");
@@ -85,7 +87,7 @@ public abstract class Conta {
 
 	}
 	
-	public void menuInicial() {
+	public void menuInicial() throws ValorNegativoException, SaqueException {
 		
 		if(this.cpfTitular != null) {
 			
@@ -133,7 +135,7 @@ public abstract class Conta {
 	}
 	
 	
-	public void menuMovimentacaoConta() {
+	public void menuMovimentacaoConta() throws ValorNegativoException, SaqueException {
 		
 		boolean continuaMenu = true;
 		int opcao;
@@ -156,13 +158,15 @@ public abstract class Conta {
 					sacar();
 				} catch (SaqueException e) {
 					System.out.println(e.getMessage());
+				} catch (ValorNegativoException e) {
+					System.out.println(e.getMessage());
 				}
 				break;
 			case 2:
 				continuaMenu = false;
 				try {
 					depositar();
-				} catch (DepositoNegativoException e) {
+				} catch (ValorNegativoException e) {
 					System.out.println(e.getMessage());
 				}
 				break;
@@ -196,7 +200,7 @@ public abstract class Conta {
 	}
 	
 	
-	public void menuRelatorio() {
+	public void menuRelatorio() throws ValorNegativoException, SaqueException {
 		
 		boolean continuaMenu = true;
 		int opcao;

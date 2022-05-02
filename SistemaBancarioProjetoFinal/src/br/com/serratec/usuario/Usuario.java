@@ -1,11 +1,12 @@
-package br.com.serratec.usuario;
+ package br.com.serratec.usuario;
+
+import java.util.Scanner;
 
 public abstract class Usuario {
-	
+	Scanner leitor = new Scanner(System.in);
     protected String nome;
     protected String cpf;
     protected String senha;
-    
 
     public Usuario(String nome, String cpf, String senha) {
         this.nome = nome;
@@ -27,9 +28,5 @@ public abstract class Usuario {
 
     public boolean Autenticar(String cpf, String senha){
         return this.cpf.equals(cpf) && this.senha.equals(senha);
-    }
-
-    public void Login(String nome, String senha){
-        //TODO: Criar login
     }
 }
