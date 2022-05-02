@@ -4,11 +4,10 @@ import br.com.serratec.enums.Agencia;
 import br.com.serratec.enums.TipoConta;
 import br.com.serratec.usuario.Cliente;
 
-public class ContaCorrente extends Conta{
-    private TipoConta tipo;
-
-    public ContaCorrente(Cliente cpfTitular, int numeroConta, Agencia idAgencia, TipoConta tipo) {
-        super(cpfTitular, numeroConta, idAgencia);
-        this.tipo = tipo;
+public class ContaCorrente extends Conta {
+	
+    public ContaCorrente(Cliente cliente, int numeroConta, Agencia idAgencia) {
+        super(cliente.getCpf(), cliente.getNome(), numeroConta, idAgencia, TipoConta.CONTA_CORRENTE);
     }
+	
 }
