@@ -64,7 +64,7 @@ public class MainSistemaInterno {
 		if(usuarioLogado != null) {
 			//pegar conta do usuario da lista de contas carregada no inicio
 			for (Conta conta : listaContas) {
-				if(conta.getCpfTitular().equals(usuarioLogado.getCpf())) {
+				if(conta.getCliente().getCpf().equals(usuarioLogado.getCpf())) {
 					contaLogado = conta;
 				}
 			}
