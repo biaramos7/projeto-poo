@@ -73,7 +73,6 @@ public class MainSistemaInterno {
 					contaLogado = conta;
 				}
 			}
-			
 			contaLogado.menuInicial();
 		}
 		
