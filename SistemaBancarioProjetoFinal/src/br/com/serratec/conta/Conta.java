@@ -11,6 +11,8 @@ import br.com.serratec.excecoes.SaqueException;
 import br.com.serratec.usuario.Cliente;
 
 public abstract class Conta {
+	// Esse scanner leitor está declarado como se fosse um atributo(caractéristica de conta), o ideal é que
+	// ele fosse declarado em outro lugar, tipo menu, e depois só passado como parâmetro para as funções que o usassem
 	Scanner leitor = new Scanner(System.in);
 	protected String cpfTitular;
 	private String nomeTitular;
@@ -27,6 +29,8 @@ public abstract class Conta {
 		this.tipo = tipo;
 	}
 
+	// É bom isolar responsabilidade. Seria melhor que essa função só aumentasse/diminuisse o saldo da conta
+	// As perguntas e leituras deveriam ser feitos nos menus
 	public void sacar() throws SaqueException, ValorNegativoException {
 		System.out.println("Digite o valor do saque: ");
 		double valorSaque = leitor.nextDouble();
@@ -39,7 +43,8 @@ public abstract class Conta {
 			System.out.println("Saque de R$ "+valorSaque+" efetuado com sucesso.");
 		}
 	}
-	
+
+	// Mesma sugestão do saque
 	public void depositar() throws ValorNegativoException {
 		System.out.println("Quanto deseja depositar?");
 		double valorDeposito = leitor.nextDouble();
@@ -51,6 +56,7 @@ public abstract class Conta {
 		}
 	}
 
+	// Mesma sugestão do saque
 	public void transferir() throws ContaNaoEncontradaException {
 		System.out.println("Digite a conta para transferência:");
 		int numeroConta = leitor.nextInt();
@@ -90,7 +96,9 @@ public abstract class Conta {
 	public void menuInicial() throws ValorNegativoException, SaqueException {
 		
 		if(this.cpfTitular != null) {
-			
+
+			// Talvez fosse melhor começar aqui com false e só setar true no default do switch
+			// Assim evitaria a repetição dentro dos cases do switch
 			boolean continuaMenu = true;
 			int opcao;
 
@@ -125,9 +133,11 @@ public abstract class Conta {
 				}
 				
 			} while (continuaMenu);
-			
+
+			// Não é uma boa prática chamar login de dentro da conta já que para excutá-lo
+			// você já estaria dentro de uma conta. A melhor saída aqui, seria fazer o programa parar
 			if(opcao == 3) {
-				MainSistemaInterno.login();
+				System.exit(1);
 			}
 		
 		}
